@@ -66,7 +66,7 @@ namespace MDIPaint
             {
                 _startPoint = e.Location;
                 _currentMousePos = e.Location;
-                _lastPoint = e.Location; // Инициализируем последнюю точку
+                _lastPoint = e.Location;
 
                 if (MainForm.CurrentTool == DrawingTool.Line ||
                     MainForm.CurrentTool == DrawingTool.Rectangle ||
@@ -78,7 +78,6 @@ namespace MDIPaint
                 else if (MainForm.CurrentTool == DrawingTool.Brush ||
                          MainForm.CurrentTool == DrawingTool.Eraser)
                 {
-                    // Рисуем начальную точку
                     DrawBrushPoint(e.Location);
                 }
             }
@@ -93,13 +92,11 @@ namespace MDIPaint
                 if (MainForm.CurrentTool == DrawingTool.Brush ||
                     MainForm.CurrentTool == DrawingTool.Eraser)
                 {
-                    // Рисуем непрерывную линию из квадратов
                     DrawBrushLine(_lastPoint, e.Location);
                     _lastPoint = e.Location;
                 }
                 else if (_isDrawing)
                 {
-                    // Для фигур просто обновляем позицию
                 }
 
                 Invalidate();
@@ -115,6 +112,7 @@ namespace MDIPaint
 
             return new Rectangle(x, y, width, height);
         }
+
         private void DocumentForm_MouseUp(object sender, MouseEventArgs e)
         {
             if (_isDrawing)
@@ -122,6 +120,8 @@ namespace MDIPaint
                 using (Graphics g = Graphics.FromImage(Bitmap))
                 {
                     Pen pen = new Pen(MainForm.CurrentColor, MainForm.PenWidth);
+                    Brush brush = new SolidBrush(MainForm.CurrentColor);
+                    Rectangle rect = GetRectangle(_startPoint, e.Location);
 
                     switch (MainForm.CurrentTool)
                     {
@@ -129,20 +129,24 @@ namespace MDIPaint
                             g.DrawLine(pen, _startPoint, e.Location);
                             break;
                         case DrawingTool.Rectangle:
-                            g.DrawRectangle(pen, GetRectangle(_startPoint, e.Location));
+                            if (MainForm.FillShapes)
+                                g.FillRectangle(brush, rect);
+                            g.DrawRectangle(pen, rect);
                             break;
                         case DrawingTool.Ellipse:
-                            g.DrawEllipse(pen, GetRectangle(_startPoint, e.Location));
+                            if (MainForm.FillShapes)
+                                g.FillEllipse(brush, rect);
+                            g.DrawEllipse(pen, rect);
                             break;
                     }
                 }
-
                 _isDrawing = false;
                 _previewBitmap?.Dispose();
                 _previewBitmap = null;
             }
             Invalidate();
         }
+
         private Rectangle GetRectangle(Point start, Point end)
         {
             return new Rectangle(
@@ -151,36 +155,40 @@ namespace MDIPaint
                 Math.Abs(start.X - end.X),
                 Math.Abs(start.Y - end.Y));
         }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-
-            // 1. Рисуем основное изображение
             e.Graphics.DrawImage(Bitmap, 0, 0);
 
-            // 2. Рисуем предпросмотр текущей фигуры
             if (_isDrawing && _previewBitmap != null)
             {
                 e.Graphics.DrawImage(_previewBitmap, 0, 0);
-
-                using (Pen previewPen = new Pen(MainForm.CurrentColor, MainForm.PenWidth))
+                using (Pen pen = new Pen(MainForm.CurrentColor, MainForm.PenWidth))
+                using (Brush brush = new SolidBrush(MainForm.CurrentColor))
                 {
+                    Rectangle rect = GetRectangle(_startPoint, _currentMousePos);
 
                     switch (MainForm.CurrentTool)
                     {
                         case DrawingTool.Line:
-                            e.Graphics.DrawLine(previewPen, _startPoint, _currentMousePos);
+                            e.Graphics.DrawLine(pen, _startPoint, _currentMousePos);
                             break;
                         case DrawingTool.Rectangle:
-                            e.Graphics.DrawRectangle(previewPen, GetRectangle(_startPoint, _currentMousePos));
+                            if (MainForm.FillShapes)
+                                e.Graphics.FillRectangle(brush, rect);
+                            e.Graphics.DrawRectangle(pen, rect);
                             break;
                         case DrawingTool.Ellipse:
-                            e.Graphics.DrawEllipse(previewPen, GetRectangle(_startPoint, _currentMousePos));
+                            if (MainForm.FillShapes)
+                                e.Graphics.FillEllipse(brush, rect);
+                            e.Graphics.DrawEllipse(pen, rect);
                             break;
                     }
                 }
             }
         }
+
         private void DrawBrushPoint(Point point)
         {
             using (Graphics g = Graphics.FromImage(Bitmap))
@@ -188,7 +196,6 @@ namespace MDIPaint
                 Color drawColor = MainForm.CurrentTool == DrawingTool.Eraser ? Color.White : MainForm.CurrentColor;
                 int size = MainForm.PenWidth;
 
-                // Рисуем закрашенный квадрат
                 g.FillRectangle(new SolidBrush(drawColor),
                                point.X - size / 2,
                                point.Y - size / 2,
@@ -196,6 +203,7 @@ namespace MDIPaint
                                size);
             }
         }
+
         private void DrawBrushLine(Point start, Point end)
         {
             using (Graphics g = Graphics.FromImage(Bitmap))
@@ -204,10 +212,8 @@ namespace MDIPaint
                 int size = MainForm.PenWidth;
                 var brush = new SolidBrush(drawColor);
 
-                // Вычисляем расстояние между точками
                 float distance = (float)Math.Sqrt(Math.Pow(end.X - start.X, 2) + Math.Pow(end.Y - start.Y, 2));
 
-                // Количество промежуточных точек зависит от расстояния
                 int steps = Math.Max(1, (int)distance / (size / 2));
 
                 for (int i = 0; i <= steps; i++)
@@ -216,7 +222,6 @@ namespace MDIPaint
                     int x = (int)(start.X + (end.X - start.X) * ratio);
                     int y = (int)(start.Y + (end.Y - start.Y) * ratio);
 
-                    // Рисуем квадрат в каждой промежуточной точке
                     g.FillRectangle(brush,
                                   x - size / 2,
                                   y - size / 2,
@@ -225,7 +230,6 @@ namespace MDIPaint
                 }
             }
         }
-
 
         protected override void Dispose(bool disposing)
         {

@@ -5,7 +5,6 @@ namespace MDIPaint
     public partial class MainForm : Form
     {
         public static Color CurrentColor { get; set; }
-
         public static int PenWidth { get; set; }
         public string CurrentFilePath { get; set; }
 
@@ -19,132 +18,129 @@ namespace MDIPaint
         }
 
         public static DrawingTool CurrentTool { get; set; } = DrawingTool.Brush;
+        public static bool FillShapes { get; set; } = false;
 
         public MainForm()
         {
             InitializeComponent();
-            CurrentColor = System.Drawing.Color.Black; // Èçìåíåíî ñ Color íà CurrentColor
+            CurrentColor = System.Drawing.Color.Black;
             PenWidth = 3;
-            èíñòğóìåíòTextBox.Text = PenWidth.ToString();
+            toolTextBox.Text = PenWidth.ToString();
             WireUpEventHandlers();
             UpdateColorSelection();
             UpdateToolSelection();
 
-            ñîõğàíèòüToolStripMenuItem.Enabled = false;
-            ñîõğàíèòüÊàêToolStripMenuItem.Enabled = false;
+            saveToolStripMenuItem.Enabled = false;
+            saveAsToolStripMenuItem.Enabled = false;
         }
 
         private void WireUpEventHandlers()
         {
-            // Existing handlers
-            îÏğîãğàììåToolStripMenuItem.Click += îÏğîãğàììåToolStripMenuItem_Click;
-            íîâûéToolStripMenuItem.Click += íîâûéToolStripMenuItem_Click;
-            ğèñóíîêToolStripMenuItem.DropDownOpening += ğèñóíîêToolStripMenuItem_DropDownOpening;
-            ğàçìåğÕîëñòàToolStripMenuItem.Click += ğàçìåğÕîëñòàToolStripMenuItem_Click;
+            aboutToolStripMenuItem.Click += AboutToolStripMenuItem_Click;
+            newToolStripMenuItem.Click += NewToolStripMenuItem_Click;
+            drawingToolStripMenuItem.DropDownOpening += DrawingToolStripMenuItem_DropDownOpening;
+            canvasSizeToolStripMenuItem.Click += CanvasSizeToolStripMenuItem_Click;
 
-            // Color selection handlers
-            êğàñíûéToolStripMenuItem.Click += êğàñíûéToolStripMenuItem_Click;
-            ñèíèéToolStripMenuItem.Click += ñèíèéToolStripMenuItem_Click;
-            çåëåíûéToolStripMenuItem.Click += çåëåíûéToolStripMenuItem_Click;
-            äğóãîéToolStripMenuItem.Click += äğóãîéToolStripMenuItem_Click;
+            redToolStripMenuItem.Click += RedToolStripMenuItem_Click;
+            blueToolStripMenuItem.Click += BlueToolStripMenuItem_Click;
+            greenToolStripMenuItem.Click += GreenToolStripMenuItem_Click;
+            otherToolStripMenuItem.Click += OtherToolStripMenuItem_Click;
 
-            // File operations
-            ñîõğàíèòüToolStripMenuItem.Click += ñîõğàíèòüToolStripMenuItem_Click;
-            ñîõğàíèòüÊàêToolStripMenuItem.Click += ñîõğàíèòüÊàêToolStripMenuItem_Click;
-            îòêğûòüToolStripMenuItem.Click += îòêğûòüToolStripMenuItem_Click;
-            âûõîäToolStripMenuItem.Click += (s, e) => Close();
+            saveToolStripMenuItem.Click += SaveToolStripMenuItem_Click;
+            saveAsToolStripMenuItem.Click += SaveAsToolStripMenuItem_Click;
+            openToolStripMenuItem.Click += OpenToolStripMenuItem_Click;
+            exitToolStripMenuItem.Click += (s, e) => Close();
 
-            // Window arrangement
-            êàñêàäîìToolStripMenuItem.Click += (s, e) => LayoutMdi(MdiLayout.Cascade);
-            ñëåâàÍàïğàâîToolStripMenuItem.Click += (s, e) => LayoutMdi(MdiLayout.TileVertical);
-            ñâåğõóÂíèçToolStripMenuItem.Click += (s, e) => LayoutMdi(MdiLayout.TileHorizontal);
-            óïîğÿäî÷èòüÇíà÷êèToolStripMenuItem.Click += (s, e) => LayoutMdi(MdiLayout.ArrangeIcons);
+            cascadeToolStripMenuItem.Click += (s, e) => LayoutMdi(MdiLayout.Cascade);
+            tileVerticalToolStripMenuItem.Click += (s, e) => LayoutMdi(MdiLayout.TileVertical);
+            tileHorizontalToolStripMenuItem.Click += (s, e) => LayoutMdi(MdiLayout.TileHorizontal);
+            arrangeIconsToolStripMenuItem.Click += (s, e) => LayoutMdi(MdiLayout.ArrangeIcons);
 
             this.MdiChildActivate += MainForm_MdiChildActivate;
-            èíñòğóìåíòTextBox.KeyDown += èíñòğóìåíòTextBox_KeyDown;
+            toolTextBox.KeyDown += ToolTextBox_KeyDown;
 
-            êèñòüToolStripButton.Click += (s, e) => {
+            fillToolStripButton.Click += FillToolStripButton_Click;
+
+            brushToolStripButton.Click += (s, e) => {
                 CurrentTool = DrawingTool.Brush;
                 UpdateToolSelection();
             };
 
-            ëèíèÿToolStripButton.Click += (s, e) =>
+            lineToolStripButton.Click += (s, e) =>
             {
-                MainForm.CurrentTool = DrawingTool.Line;
+                CurrentTool = DrawingTool.Line;
                 UpdateToolSelection();
             };
 
-            ıëëèïñToolStripButton.Click += (s, e) => {
+            ellipseToolStripButton.Click += (s, e) => {
                 CurrentTool = DrawingTool.Ellipse;
                 UpdateToolSelection();
             };
 
-            ïğÿìîóãîëüíèêToolStripButton.Click += (s, e) => {
+            rectangleToolStripButton.Click += (s, e) => {
                 CurrentTool = DrawingTool.Rectangle;
                 UpdateToolSelection();
             };
 
-            ëàñòèêToolStripButton.Click += (s, e) => {
+            eraserToolStripButton.Click += (s, e) => {
                 CurrentTool = DrawingTool.Eraser;
                 UpdateToolSelection();
             };
-
         }
 
         private void UpdateToolSelection()
         {
-            êèñòüToolStripButton.Checked = (CurrentTool == DrawingTool.Brush);
-            ëèíèÿToolStripButton.Checked = (CurrentTool == DrawingTool.Line);
-            ıëëèïñToolStripButton.Checked = (CurrentTool == DrawingTool.Ellipse);
-            ïğÿìîóãîëüíèêToolStripButton.Checked = (CurrentTool == DrawingTool.Rectangle);
-            ëàñòèêToolStripButton.Checked = (CurrentTool == DrawingTool.Eraser);
+            brushToolStripButton.Checked = (CurrentTool == DrawingTool.Brush);
+            lineToolStripButton.Checked = (CurrentTool == DrawingTool.Line);
+            ellipseToolStripButton.Checked = (CurrentTool == DrawingTool.Ellipse);
+            rectangleToolStripButton.Checked = (CurrentTool == DrawingTool.Rectangle);
+            eraserToolStripButton.Checked = (CurrentTool == DrawingTool.Eraser);
 
-            èíñòğóìåíòTextBox.Text = MainForm.PenWidth.ToString();
+            toolTextBox.Text = PenWidth.ToString();
         }
 
         private void MainForm_MdiChildActivate(object sender, EventArgs e)
         {
-            // Îáíîâëÿåì ñîñòîÿíèå êíîïîê ñîõğàíåíèÿ
-            ñîõğàíèòüToolStripMenuItem.Enabled = (ActiveMdiChild != null);
-            ñîõğàíèòüÊàêToolStripMenuItem.Enabled = (ActiveMdiChild != null);
+            saveToolStripMenuItem.Enabled = (ActiveMdiChild != null);
+            saveAsToolStripMenuItem.Enabled = (ActiveMdiChild != null);
         }
 
-        private void èíñòğóìåíòTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void ToolTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (int.TryParse(èíñòğóìåíòTextBox.Text, out int width) && width > 0)
+                if (int.TryParse(toolTextBox.Text, out int width) && width > 0)
                 {
                     PenWidth = width;
                 }
                 else
                 {
-                    èíñòğóìåíòTextBox.Text = PenWidth.ToString();
-                    MessageBox.Show("Ïîæàëóéñòà, ââåäèòå ïîëîæèòåëüíîå ÷èñëî", "Îøèáêà",
+                    toolTextBox.Text = PenWidth.ToString();
+                    MessageBox.Show("Please enter a positive number", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
 
-        private void îÏğîãğàììåToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var frmAbout = new AboutBox1();
             frmAbout.ShowDialog();
         }
 
-        private void íîâûéToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var frm = new DocumentForm();
             frm.MdiParent = this;
             frm.Show();
         }
 
-        private void ğèñóíîêToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        private void DrawingToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            ğàçìåğÕîëñòàToolStripMenuItem.Enabled = (ActiveMdiChild != null);
+            canvasSizeToolStripMenuItem.Enabled = (ActiveMdiChild != null);
         }
 
-        private void ğàçìåğÕîëñòàToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CanvasSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ActiveMdiChild is DocumentForm activeDoc)
             {
@@ -161,26 +157,25 @@ namespace MDIPaint
             }
         }
 
-        // Color selection methods
-        private void êğàñíûéToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CurrentColor = Color.Red;
             UpdateColorSelection();
         }
 
-        private void ñèíèéToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BlueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CurrentColor = Color.Blue;
             UpdateColorSelection();
         }
 
-        private void çåëåíûéToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GreenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CurrentColor = Color.Green;
             UpdateColorSelection();
         }
 
-        private void äğóãîéToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OtherToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (ColorDialog cd = new ColorDialog())
             {
@@ -191,13 +186,14 @@ namespace MDIPaint
                 }
             }
         }
-        private void ñîõğàíèòüToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ActiveMdiChild is DocumentForm activeDoc)
             {
                 if (string.IsNullOrEmpty(activeDoc.FilePath))
                 {
-                    ñîõğàíèòüÊàêToolStripMenuItem_Click(sender, e);
+                    SaveAsToolStripMenuItem_Click(sender, e);
                 }
                 else
                 {
@@ -206,14 +202,14 @@ namespace MDIPaint
             }
         }
 
-        private void ñîõğàíèòüÊàêToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ActiveMdiChild is DocumentForm activeDoc)
             {
                 using (SaveFileDialog dlg = new SaveFileDialog())
                 {
                     dlg.AddExtension = true;
-                    dlg.Filter = "Windows Bitmap (*.bmp)|*.bmp|Ôàéëû JPEG (*.jpg)|*.jpg|PNG (*.png)|*.png";
+                    dlg.Filter = "Windows Bitmap (*.bmp)|*.bmp|JPEG Files (*.jpg)|*.jpg|PNG (*.png)|*.png";
                     dlg.DefaultExt = "bmp";
 
                     if (dlg.ShowDialog() == DialogResult.OK)
@@ -241,16 +237,26 @@ namespace MDIPaint
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Îøèáêà ïğè ñîõğàíåíèè: {ex.Message}", "Îøèáêà",
+                MessageBox.Show($"Error saving: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void îòêğûòüToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FillToolStripButton_Click(object sender, EventArgs e)
+        {
+            FillShapes = fillToolStripButton.Checked;
+            fillToolStripButton.Image = FillShapes ?
+                Properties.Resources.fill_off :
+                Properties.Resources.fill_on;
+            fillToolStripButton.ToolTipText = FillShapes ?
+                "Mode: outline + fill" : "Mode: outline only";
+        }
+
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog dlg = new OpenFileDialog())
             {
-                dlg.Filter = "Èçîáğàæåíèÿ (*.bmp;*.jpg;*.jpeg;*.png)|*.bmp;*.jpg;*.jpeg;*.png|Âñå ôàéëû (*.*)|*.*";
+                dlg.Filter = "Images (*.bmp;*.jpg;*.jpeg;*.png)|*.bmp;*.jpg;*.jpeg;*.png|All files (*.*)|*.*";
 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
@@ -266,7 +272,7 @@ namespace MDIPaint
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Îøèáêà ïğè îòêğûòèè: {ex.Message}", "Îøèáêà",
+                        MessageBox.Show($"Error opening: {ex.Message}", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -275,14 +281,12 @@ namespace MDIPaint
 
         private void UpdateColorSelection()
         {
-            // Update visual indicators for selected color
-            êğàñíûéToolStripMenuItem.Checked = (CurrentColor == Color.Red);
-            ñèíèéToolStripMenuItem.Checked = (CurrentColor == Color.Blue);
-            çåëåíûéToolStripMenuItem.Checked = (CurrentColor == Color.Green);
-            äğóãîéToolStripMenuItem.Checked = !(CurrentColor == Color.Red ||
-                                              CurrentColor == Color.Blue ||
-                                              CurrentColor == Color.Green);
+            redToolStripMenuItem.Checked = (CurrentColor == Color.Red);
+            blueToolStripMenuItem.Checked = (CurrentColor == Color.Blue);
+            greenToolStripMenuItem.Checked = (CurrentColor == Color.Green);
+            otherToolStripMenuItem.Checked = !(CurrentColor == Color.Red ||
+                                            CurrentColor == Color.Blue ||
+                                            CurrentColor == Color.Green);
         }
-
     }
 }

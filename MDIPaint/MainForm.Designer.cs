@@ -4,39 +4,39 @@
     {
         private System.ComponentModel.IContainer components = null;
 
-        private MenuStrip основноеМеню;
-        private ToolStripMenuItem файлToolStripMenuItem;
-        private ToolStripMenuItem новыйToolStripMenuItem;
-        private ToolStripMenuItem открытьToolStripMenuItem;
-        private ToolStripSeparator разделитель1;
-        private ToolStripMenuItem сохранитьToolStripMenuItem;
-        private ToolStripMenuItem сохранитьКакToolStripMenuItem;
-        private ToolStripSeparator разделитель2;
-        private ToolStripMenuItem выходToolStripMenuItem;
-        private ToolStripMenuItem рисунокToolStripMenuItem;
-        private ToolStripMenuItem размерХолстаToolStripMenuItem;
-        private ToolStripMenuItem окноToolStripMenuItem;
-        private ToolStripMenuItem каскадомToolStripMenuItem;
-        private ToolStripMenuItem слеваНаправоToolStripMenuItem;
-        private ToolStripMenuItem сверхуВнизToolStripMenuItem;
-        private ToolStripMenuItem упорядочитьЗначкиToolStripMenuItem;
-        private ToolStripMenuItem справкаToolStripMenuItem;
-        private ToolStripMenuItem оПрограммеToolStripMenuItem;
-        private ToolStrip панельИнструментов;
-        private ToolStripDropDownButton цветToolStripDropDownButton;
-        private ToolStripMenuItem красныйToolStripMenuItem;
-        private ToolStripMenuItem синийToolStripMenuItem;
-        private ToolStripMenuItem зеленыйToolStripMenuItem;
-        private ToolStripMenuItem другойToolStripMenuItem;
+        private MenuStrip mainMenu;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem newToolStripMenuItem;
+        private ToolStripMenuItem openToolStripMenuItem;
+        private ToolStripSeparator separator1;
+        private ToolStripMenuItem saveToolStripMenuItem;
+        private ToolStripMenuItem saveAsToolStripMenuItem;
+        private ToolStripSeparator separator2;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem drawingToolStripMenuItem;
+        private ToolStripMenuItem canvasSizeToolStripMenuItem;
+        private ToolStripMenuItem windowToolStripMenuItem;
+        private ToolStripMenuItem cascadeToolStripMenuItem;
+        private ToolStripMenuItem tileVerticalToolStripMenuItem;
+        private ToolStripMenuItem tileHorizontalToolStripMenuItem;
+        private ToolStripMenuItem arrangeIconsToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem aboutToolStripMenuItem;
+        private ToolStrip toolStrip;
+        private ToolStripDropDownButton colorToolStripDropDownButton;
+        private ToolStripMenuItem redToolStripMenuItem;
+        private ToolStripMenuItem blueToolStripMenuItem;
+        private ToolStripMenuItem greenToolStripMenuItem;
+        private ToolStripMenuItem otherToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator3;
-        private ToolStripLabel кистьLabel;
-        private ToolStripTextBox инструментTextBox;
-        private ToolStripButton кистьToolStripButton;
-        private ToolStripButton линияToolStripButton;
-        private ToolStripButton эллипсToolStripButton;
-        private ToolStripButton прямоугольникToolStripButton;
-        private ToolStripButton ластикToolStripButton;
-        private ToolStripButton заливкаToolStripButton;
+        private ToolStripLabel brushLabel;
+        private ToolStripTextBox toolTextBox;
+        private ToolStripButton brushToolStripButton;
+        private ToolStripButton lineToolStripButton;
+        private ToolStripButton ellipseToolStripButton;
+        private ToolStripButton rectangleToolStripButton;
+        private ToolStripButton eraserToolStripButton;
+        private ToolStripButton fillToolStripButton;
         private ToolStripSeparator toolStripSeparator1;
 
         protected override void Dispose(bool disposing)
@@ -50,313 +50,243 @@
 
         private void InitializeComponent()
         {
-            основноеМеню = new MenuStrip();
-            файлToolStripMenuItem = new ToolStripMenuItem();
-            новыйToolStripMenuItem = new ToolStripMenuItem();
-            открытьToolStripMenuItem = new ToolStripMenuItem();
-            разделитель1 = new ToolStripSeparator();
-            сохранитьToolStripMenuItem = new ToolStripMenuItem();
-            сохранитьКакToolStripMenuItem = new ToolStripMenuItem();
-            разделитель2 = new ToolStripSeparator();
-            выходToolStripMenuItem = new ToolStripMenuItem();
-            рисунокToolStripMenuItem = new ToolStripMenuItem();
-            размерХолстаToolStripMenuItem = new ToolStripMenuItem();
-            окноToolStripMenuItem = new ToolStripMenuItem();
-            каскадомToolStripMenuItem = new ToolStripMenuItem();
-            слеваНаправоToolStripMenuItem = new ToolStripMenuItem();
-            сверхуВнизToolStripMenuItem = new ToolStripMenuItem();
-            упорядочитьЗначкиToolStripMenuItem = new ToolStripMenuItem();
-            справкаToolStripMenuItem = new ToolStripMenuItem();
-            оПрограммеToolStripMenuItem = new ToolStripMenuItem();
-            панельИнструментов = new ToolStrip();
-            кистьToolStripButton = new ToolStripButton();
-            линияToolStripButton = new ToolStripButton();
-            эллипсToolStripButton = new ToolStripButton();
-            прямоугольникToolStripButton = new ToolStripButton();
-            ластикToolStripButton = new ToolStripButton();
+            mainMenu = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            newToolStripMenuItem = new ToolStripMenuItem();
+            openToolStripMenuItem = new ToolStripMenuItem();
+            separator1 = new ToolStripSeparator();
+            saveToolStripMenuItem = new ToolStripMenuItem();
+            saveAsToolStripMenuItem = new ToolStripMenuItem();
+            separator2 = new ToolStripSeparator();
+            exitToolStripMenuItem = new ToolStripMenuItem();
+            drawingToolStripMenuItem = new ToolStripMenuItem();
+            canvasSizeToolStripMenuItem = new ToolStripMenuItem();
+            windowToolStripMenuItem = new ToolStripMenuItem();
+            cascadeToolStripMenuItem = new ToolStripMenuItem();
+            tileVerticalToolStripMenuItem = new ToolStripMenuItem();
+            tileHorizontalToolStripMenuItem = new ToolStripMenuItem();
+            arrangeIconsToolStripMenuItem = new ToolStripMenuItem();
+            helpToolStripMenuItem = new ToolStripMenuItem();
+            aboutToolStripMenuItem = new ToolStripMenuItem();
+            toolStrip = new ToolStrip();
+            brushToolStripButton = new ToolStripButton();
+            lineToolStripButton = new ToolStripButton();
+            ellipseToolStripButton = new ToolStripButton();
+            rectangleToolStripButton = new ToolStripButton();
+            eraserToolStripButton = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
-            заливкаToolStripButton = new ToolStripButton();
-            цветToolStripDropDownButton = new ToolStripDropDownButton();
-            красныйToolStripMenuItem = new ToolStripMenuItem();
-            синийToolStripMenuItem = new ToolStripMenuItem();
-            зеленыйToolStripMenuItem = new ToolStripMenuItem();
-            другойToolStripMenuItem = new ToolStripMenuItem();
+            fillToolStripButton = new ToolStripButton();
+            colorToolStripDropDownButton = new ToolStripDropDownButton();
+            redToolStripMenuItem = new ToolStripMenuItem();
+            blueToolStripMenuItem = new ToolStripMenuItem();
+            greenToolStripMenuItem = new ToolStripMenuItem();
+            otherToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
-            кистьLabel = new ToolStripLabel();
-            инструментTextBox = new ToolStripTextBox();
-            основноеМеню.SuspendLayout();
-            панельИнструментов.SuspendLayout();
+            brushLabel = new ToolStripLabel();
+            toolTextBox = new ToolStripTextBox();
+            mainMenu.SuspendLayout();
+            toolStrip.SuspendLayout();
             SuspendLayout();
-            // 
-            // основноеМеню
-            // 
-            основноеМеню.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, рисунокToolStripMenuItem, окноToolStripMenuItem, справкаToolStripMenuItem });
-            основноеМеню.Location = new Point(0, 0);
-            основноеМеню.MdiWindowListItem = окноToolStripMenuItem;
-            основноеМеню.Name = "основноеМеню";
-            основноеМеню.Padding = new Padding(7, 2, 0, 2);
-            основноеМеню.Size = new Size(933, 24);
-            основноеМеню.TabIndex = 0;
-            основноеМеню.Text = "menuStrip1";
-            // 
-            // файлToolStripMenuItem
-            // 
-            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { новыйToolStripMenuItem, открытьToolStripMenuItem, разделитель1, сохранитьToolStripMenuItem, сохранитьКакToolStripMenuItem, разделитель2, выходToolStripMenuItem });
-            файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            файлToolStripMenuItem.Size = new Size(48, 20);
-            файлToolStripMenuItem.Text = "&Файл";
-            // 
-            // новыйToolStripMenuItem
-            // 
-            новыйToolStripMenuItem.Name = "новыйToolStripMenuItem";
-            новыйToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.N;
-            новыйToolStripMenuItem.Size = new Size(235, 22);
-            новыйToolStripMenuItem.Text = "&Новый";
-            // 
-            // открытьToolStripMenuItem
-            // 
-            открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            открытьToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.O;
-            открытьToolStripMenuItem.Size = new Size(235, 22);
-            открытьToolStripMenuItem.Text = "&Открыть...";
-            // 
-            // разделитель1
-            // 
-            разделитель1.Name = "разделитель1";
-            разделитель1.Size = new Size(232, 6);
-            // 
-            // сохранитьToolStripMenuItem
-            // 
-            сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            сохранитьToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
-            сохранитьToolStripMenuItem.Size = new Size(235, 22);
-            сохранитьToolStripMenuItem.Text = "&Сохранить";
-            // 
-            // сохранитьКакToolStripMenuItem
-            // 
-            сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
-            сохранитьКакToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.S;
-            сохранитьКакToolStripMenuItem.Size = new Size(235, 22);
-            сохранитьКакToolStripMenuItem.Text = "Сохранить &как...";
-            // 
-            // разделитель2
-            // 
-            разделитель2.Name = "разделитель2";
-            разделитель2.Size = new Size(232, 6);
-            // 
-            // выходToolStripMenuItem
-            // 
-            выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            выходToolStripMenuItem.ShortcutKeys = Keys.Alt | Keys.F4;
-            выходToolStripMenuItem.Size = new Size(235, 22);
-            выходToolStripMenuItem.Text = "&Выход";
-            // 
-            // рисунокToolStripMenuItem
-            // 
-            рисунокToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { размерХолстаToolStripMenuItem });
-            рисунокToolStripMenuItem.Name = "рисунокToolStripMenuItem";
-            рисунокToolStripMenuItem.Size = new Size(65, 20);
-            рисунокToolStripMenuItem.Text = "&Рисунок";
-            // 
-            // размерХолстаToolStripMenuItem
-            // 
-            размерХолстаToolStripMenuItem.Name = "размерХолстаToolStripMenuItem";
-            размерХолстаToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.R;
-            размерХолстаToolStripMenuItem.Size = new Size(204, 22);
-            размерХолстаToolStripMenuItem.Text = "&Размер холста...";
-            // 
-            // окноToolStripMenuItem
-            // 
-            окноToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { каскадомToolStripMenuItem, слеваНаправоToolStripMenuItem, сверхуВнизToolStripMenuItem, упорядочитьЗначкиToolStripMenuItem });
-            окноToolStripMenuItem.Name = "окноToolStripMenuItem";
-            окноToolStripMenuItem.Size = new Size(48, 20);
-            окноToolStripMenuItem.Text = "&Окно";
-            // 
-            // каскадомToolStripMenuItem
-            // 
-            каскадомToolStripMenuItem.Name = "каскадомToolStripMenuItem";
-            каскадомToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.C;
-            каскадомToolStripMenuItem.Size = new Size(256, 22);
-            каскадомToolStripMenuItem.Text = "&Каскадом";
-            // 
-            // слеваНаправоToolStripMenuItem
-            // 
-            слеваНаправоToolStripMenuItem.Name = "слеваНаправоToolStripMenuItem";
-            слеваНаправоToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.H;
-            слеваНаправоToolStripMenuItem.Size = new Size(256, 22);
-            слеваНаправоToolStripMenuItem.Text = "&Слева направо";
-            // 
-            // сверхуВнизToolStripMenuItem
-            // 
-            сверхуВнизToolStripMenuItem.Name = "сверхуВнизToolStripMenuItem";
-            сверхуВнизToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.V;
-            сверхуВнизToolStripMenuItem.Size = new Size(256, 22);
-            сверхуВнизToolStripMenuItem.Text = "&Сверху вниз";
-            // 
-            // упорядочитьЗначкиToolStripMenuItem
-            // 
-            упорядочитьЗначкиToolStripMenuItem.Name = "упорядочитьЗначкиToolStripMenuItem";
-            упорядочитьЗначкиToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.I;
-            упорядочитьЗначкиToolStripMenuItem.Size = new Size(256, 22);
-            упорядочитьЗначкиToolStripMenuItem.Text = "&Упорядочить значки";
-            // 
-            // справкаToolStripMenuItem
-            // 
-            справкаToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { оПрограммеToolStripMenuItem });
-            справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            справкаToolStripMenuItem.Size = new Size(65, 20);
-            справкаToolStripMenuItem.Text = "&Справка";
-            // 
-            // оПрограммеToolStripMenuItem
-            // 
-            оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            оПрограммеToolStripMenuItem.ShortcutKeys = Keys.F1;
-            оПрограммеToolStripMenuItem.Size = new Size(177, 22);
-            оПрограммеToolStripMenuItem.Text = "&О программе...";
-            // 
-            // панельИнструментов
-            // 
-            панельИнструментов.Items.AddRange(new ToolStripItem[] { кистьToolStripButton, линияToolStripButton, эллипсToolStripButton, прямоугольникToolStripButton, ластикToolStripButton, toolStripSeparator1, заливкаToolStripButton, цветToolStripDropDownButton, toolStripSeparator3, кистьLabel, инструментTextBox });
-            панельИнструментов.Location = new Point(0, 24);
-            панельИнструментов.Name = "панельИнструментов";
-            панельИнструментов.Size = new Size(933, 25);
-            панельИнструментов.TabIndex = 1;
-            панельИнструментов.Text = "toolStrip1";
-            // 
-            // кистьToolStripButton
-            // 
-            кистьToolStripButton.CheckOnClick = true;
-            кистьToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            кистьToolStripButton.Image = Properties.Resources.paint_brush;
-            кистьToolStripButton.ImageTransparentColor = Color.Magenta;
-            кистьToolStripButton.Name = "кистьToolStripButton";
-            кистьToolStripButton.Size = new Size(23, 22);
-            кистьToolStripButton.Text = "Кисть";
-            // 
-            // линияToolStripButton
-            // 
-            линияToolStripButton.CheckOnClick = true;
-            линияToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            линияToolStripButton.Image = Properties.Resources.line;
-            линияToolStripButton.ImageTransparentColor = Color.Magenta;
-            линияToolStripButton.Name = "линияToolStripButton";
-            линияToolStripButton.Size = new Size(23, 22);
-            линияToolStripButton.Text = "Линия";
-            // 
-            // эллипсToolStripButton
-            // 
-            эллипсToolStripButton.CheckOnClick = true;
-            эллипсToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            эллипсToolStripButton.Image = Properties.Resources.cir;
-            эллипсToolStripButton.ImageTransparentColor = Color.Magenta;
-            эллипсToolStripButton.Name = "эллипсToolStripButton";
-            эллипсToolStripButton.Size = new Size(23, 22);
-            эллипсToolStripButton.Text = "Эллипс";
-            // 
-            // прямоугольникToolStripButton
-            // 
-            прямоугольникToolStripButton.CheckOnClick = true;
-            прямоугольникToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            прямоугольникToolStripButton.Image = Properties.Resources.rec;
-            прямоугольникToolStripButton.ImageTransparentColor = Color.Magenta;
-            прямоугольникToolStripButton.Name = "прямоугольникToolStripButton";
-            прямоугольникToolStripButton.Size = new Size(23, 22);
-            прямоугольникToolStripButton.Text = "Прямоугольник";
-            // 
-            // ластикToolStripButton
-            // 
-            ластикToolStripButton.CheckOnClick = true;
-            ластикToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            ластикToolStripButton.Image = Properties.Resources.erase;
-            ластикToolStripButton.ImageTransparentColor = Color.Magenta;
-            ластикToolStripButton.Name = "ластикToolStripButton";
-            ластикToolStripButton.Size = new Size(23, 22);
-            ластикToolStripButton.Text = "Ластик";
-            // 
-            // toolStripSeparator1
-            // 
+
+            mainMenu.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, drawingToolStripMenuItem, windowToolStripMenuItem, helpToolStripMenuItem });
+            mainMenu.Location = new Point(0, 0);
+            mainMenu.MdiWindowListItem = windowToolStripMenuItem;
+            mainMenu.Name = "mainMenu";
+            mainMenu.Padding = new Padding(7, 2, 0, 2);
+            mainMenu.Size = new Size(933, 24);
+            mainMenu.TabIndex = 0;
+            mainMenu.Text = "menuStrip1";
+
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, separator1, saveToolStripMenuItem, saveAsToolStripMenuItem, separator2, exitToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(37, 20);
+            fileToolStripMenuItem.Text = "&File";
+
+            newToolStripMenuItem.Name = "newToolStripMenuItem";
+            newToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.N;
+            newToolStripMenuItem.Size = new Size(180, 22);
+            newToolStripMenuItem.Text = "&New";
+
+            openToolStripMenuItem.Name = "openToolStripMenuItem";
+            openToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.O;
+            openToolStripMenuItem.Size = new Size(180, 22);
+            openToolStripMenuItem.Text = "&Open...";
+
+            separator1.Name = "separator1";
+            separator1.Size = new Size(177, 6);
+
+            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            saveToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
+            saveToolStripMenuItem.Size = new Size(180, 22);
+            saveToolStripMenuItem.Text = "&Save";
+
+            saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            saveAsToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.S;
+            saveAsToolStripMenuItem.Size = new Size(180, 22);
+            saveAsToolStripMenuItem.Text = "Save &as...";
+
+            separator2.Name = "separator2";
+            separator2.Size = new Size(177, 6);
+
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.ShortcutKeys = Keys.Alt | Keys.F4;
+            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Text = "E&xit";
+
+            drawingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { canvasSizeToolStripMenuItem });
+            drawingToolStripMenuItem.Name = "drawingToolStripMenuItem";
+            drawingToolStripMenuItem.Size = new Size(59, 20);
+            drawingToolStripMenuItem.Text = "&Drawing";
+
+            canvasSizeToolStripMenuItem.Name = "canvasSizeToolStripMenuItem";
+            canvasSizeToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.R;
+            canvasSizeToolStripMenuItem.Size = new Size(180, 22);
+            canvasSizeToolStripMenuItem.Text = "Canvas &size...";
+
+            windowToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cascadeToolStripMenuItem, tileVerticalToolStripMenuItem, tileHorizontalToolStripMenuItem, arrangeIconsToolStripMenuItem });
+            windowToolStripMenuItem.Name = "windowToolStripMenuItem";
+            windowToolStripMenuItem.Size = new Size(63, 20);
+            windowToolStripMenuItem.Text = "&Window";
+
+            cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
+            cascadeToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.C;
+            cascadeToolStripMenuItem.Size = new Size(180, 22);
+            cascadeToolStripMenuItem.Text = "&Cascade";
+
+            tileVerticalToolStripMenuItem.Name = "tileVerticalToolStripMenuItem";
+            tileVerticalToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.H;
+            tileVerticalToolStripMenuItem.Size = new Size(180, 22);
+            tileVerticalToolStripMenuItem.Text = "Tile &Vertical";
+
+            tileHorizontalToolStripMenuItem.Name = "tileHorizontalToolStripMenuItem";
+            tileHorizontalToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.V;
+            tileHorizontalToolStripMenuItem.Size = new Size(180, 22);
+            tileHorizontalToolStripMenuItem.Text = "Tile &Horizontal";
+
+            arrangeIconsToolStripMenuItem.Name = "arrangeIconsToolStripMenuItem";
+            arrangeIconsToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.I;
+            arrangeIconsToolStripMenuItem.Size = new Size(180, 22);
+            arrangeIconsToolStripMenuItem.Text = "&Arrange Icons";
+
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { aboutToolStripMenuItem });
+            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            helpToolStripMenuItem.Size = new Size(44, 20);
+            helpToolStripMenuItem.Text = "&Help";
+
+            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            aboutToolStripMenuItem.ShortcutKeys = Keys.F1;
+            aboutToolStripMenuItem.Size = new Size(180, 22);
+            aboutToolStripMenuItem.Text = "&About...";
+
+            toolStrip.Items.AddRange(new ToolStripItem[] { brushToolStripButton, lineToolStripButton, ellipseToolStripButton, rectangleToolStripButton, eraserToolStripButton, toolStripSeparator1, fillToolStripButton, colorToolStripDropDownButton, toolStripSeparator3, brushLabel, toolTextBox });
+            toolStrip.Location = new Point(0, 24);
+            toolStrip.Name = "toolStrip";
+            toolStrip.Size = new Size(933, 25);
+            toolStrip.TabIndex = 1;
+            toolStrip.Text = "toolStrip1";
+
+            brushToolStripButton.CheckOnClick = true;
+            brushToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            brushToolStripButton.Image = Properties.Resources.paint_brush;
+            brushToolStripButton.ImageTransparentColor = Color.Magenta;
+            brushToolStripButton.Name = "brushToolStripButton";
+            brushToolStripButton.Size = new Size(23, 22);
+            brushToolStripButton.Text = "Brush";
+
+            lineToolStripButton.CheckOnClick = true;
+            lineToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            lineToolStripButton.Image = Properties.Resources.line;
+            lineToolStripButton.ImageTransparentColor = Color.Magenta;
+            lineToolStripButton.Name = "lineToolStripButton";
+            lineToolStripButton.Size = new Size(23, 22);
+            lineToolStripButton.Text = "Line";
+
+            ellipseToolStripButton.CheckOnClick = true;
+            ellipseToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            ellipseToolStripButton.Image = Properties.Resources.cir;
+            ellipseToolStripButton.ImageTransparentColor = Color.Magenta;
+            ellipseToolStripButton.Name = "ellipseToolStripButton";
+            ellipseToolStripButton.Size = new Size(23, 22);
+            ellipseToolStripButton.Text = "Ellipse";
+
+            rectangleToolStripButton.CheckOnClick = true;
+            rectangleToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            rectangleToolStripButton.Image = Properties.Resources.rec;
+            rectangleToolStripButton.ImageTransparentColor = Color.Magenta;
+            rectangleToolStripButton.Name = "rectangleToolStripButton";
+            rectangleToolStripButton.Size = new Size(23, 22);
+            rectangleToolStripButton.Text = "Rectangle";
+
+            eraserToolStripButton.CheckOnClick = true;
+            eraserToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            eraserToolStripButton.Image = Properties.Resources.erase;
+            eraserToolStripButton.ImageTransparentColor = Color.Magenta;
+            eraserToolStripButton.Name = "eraserToolStripButton";
+            eraserToolStripButton.Size = new Size(23, 22);
+            eraserToolStripButton.Text = "Eraser";
+
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(6, 25);
-            // 
-            // заливкаToolStripButton
-            // 
-            // Изменим кнопку на переключаемую
-            this.заливкаToolStripButton.CheckOnClick = true;
-            this.заливкаToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.заливкаToolStripButton.ImageTransparentColor = Color.Magenta;
-            this.заливкаToolStripButton.Name = "заливкаToolStripButton";
-            this.заливкаToolStripButton.Size = new Size(23, 22);
-            this.заливкаToolStripButton.Text = "Заливка фигур";
-            // 
-            // цветToolStripDropDownButton
-            // 
-            цветToolStripDropDownButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            цветToolStripDropDownButton.DropDownItems.AddRange(new ToolStripItem[] { красныйToolStripMenuItem, синийToolStripMenuItem, зеленыйToolStripMenuItem, другойToolStripMenuItem });
-            цветToolStripDropDownButton.ImageTransparentColor = Color.Magenta;
-            цветToolStripDropDownButton.Name = "цветToolStripDropDownButton";
-            цветToolStripDropDownButton.Size = new Size(13, 22);
-            цветToolStripDropDownButton.Text = "Цвет";
-            // 
-            // красныйToolStripMenuItem
-            // 
-            красныйToolStripMenuItem.Name = "красныйToolStripMenuItem";
-            красныйToolStripMenuItem.Size = new Size(180, 22);
-            красныйToolStripMenuItem.Text = "Красный";
-            // 
-            // синийToolStripMenuItem
-            // 
-            синийToolStripMenuItem.Name = "синийToolStripMenuItem";
-            синийToolStripMenuItem.Size = new Size(180, 22);
-            синийToolStripMenuItem.Text = "Синий";
-            // 
-            // зеленыйToolStripMenuItem
-            // 
-            зеленыйToolStripMenuItem.Name = "зеленыйToolStripMenuItem";
-            зеленыйToolStripMenuItem.Size = new Size(180, 22);
-            зеленыйToolStripMenuItem.Text = "Зеленый";
-            // 
-            // другойToolStripMenuItem
-            // 
-            другойToolStripMenuItem.Name = "другойToolStripMenuItem";
-            другойToolStripMenuItem.Size = new Size(180, 22);
-            другойToolStripMenuItem.Text = "Другой...";
-            // 
-            // toolStripSeparator3
-            // 
+
+            fillToolStripButton.CheckOnClick = true;
+            fillToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            fillToolStripButton.Image = Properties.Resources.fill_on;
+            fillToolStripButton.ImageTransparentColor = Color.Magenta;
+            fillToolStripButton.Name = "fillToolStripButton";
+            fillToolStripButton.Size = new Size(23, 22);
+            fillToolStripButton.Text = "Fill shapes (off)";
+            fillToolStripButton.Click += FillToolStripButton_Click;
+
+            colorToolStripDropDownButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            colorToolStripDropDownButton.DropDownItems.AddRange(new ToolStripItem[] { redToolStripMenuItem, blueToolStripMenuItem, greenToolStripMenuItem, otherToolStripMenuItem });
+            colorToolStripDropDownButton.ImageTransparentColor = Color.Magenta;
+            colorToolStripDropDownButton.Name = "colorToolStripDropDownButton";
+            colorToolStripDropDownButton.Size = new Size(13, 22);
+            colorToolStripDropDownButton.Text = "Color";
+
+            redToolStripMenuItem.Name = "redToolStripMenuItem";
+            redToolStripMenuItem.Size = new Size(180, 22);
+            redToolStripMenuItem.Text = "Red";
+
+            blueToolStripMenuItem.Name = "blueToolStripMenuItem";
+            blueToolStripMenuItem.Size = new Size(180, 22);
+            blueToolStripMenuItem.Text = "Blue";
+
+            greenToolStripMenuItem.Name = "greenToolStripMenuItem";
+            greenToolStripMenuItem.Size = new Size(180, 22);
+            greenToolStripMenuItem.Text = "Green";
+
+            otherToolStripMenuItem.Name = "otherToolStripMenuItem";
+            otherToolStripMenuItem.Size = new Size(180, 22);
+            otherToolStripMenuItem.Text = "Other...";
+
             toolStripSeparator3.Name = "toolStripSeparator3";
             toolStripSeparator3.Size = new Size(6, 25);
-            // 
-            // кистьLabel
-            // 
-            кистьLabel.Name = "кистьLabel";
-            кистьLabel.Size = new Size(41, 22);
-            кистьLabel.Text = "Кисть:";
-            // 
-            // инструментTextBox
-            // 
-            инструментTextBox.Name = "инструментTextBox";
-            инструментTextBox.Size = new Size(116, 25);
-            инструментTextBox.Text = "3";
-            // 
-            // MainForm
-            // 
+
+            brushLabel.Name = "brushLabel";
+            brushLabel.Size = new Size(36, 22);
+            brushLabel.Text = "Size:";
+
+            toolTextBox.Name = "toolTextBox";
+            toolTextBox.Size = new Size(116, 25);
+            toolTextBox.Text = "3";
+
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(933, 519);
-            Controls.Add(панельИнструментов);
-            Controls.Add(основноеМеню);
+            Controls.Add(toolStrip);
+            Controls.Add(mainMenu);
             IsMdiContainer = true;
-            MainMenuStrip = основноеМеню;
+            MainMenuStrip = mainMenu;
             Margin = new Padding(4, 3, 4, 3);
             Name = "MainForm";
             Text = "MDI Paint";
-            основноеМеню.ResumeLayout(false);
-            основноеМеню.PerformLayout();
-            панельИнструментов.ResumeLayout(false);
-            панельИнструментов.PerformLayout();
+            mainMenu.ResumeLayout(false);
+            mainMenu.PerformLayout();
+            toolStrip.ResumeLayout(false);
+            toolStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
-
         }
     }
 }
