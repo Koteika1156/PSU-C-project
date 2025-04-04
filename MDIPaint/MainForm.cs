@@ -4,18 +4,31 @@ namespace MDIPaint
 {
     public partial class MainForm : Form
     {
-        public static Color Color { get; set; }
+        public static Color CurrentColor { get; set; }
+
         public static int PenWidth { get; set; }
         public string CurrentFilePath { get; set; }
+
+        public enum DrawingTool
+        {
+            Brush,
+            Line,
+            Ellipse,
+            Rectangle,
+            Eraser
+        }
+
+        public static DrawingTool CurrentTool { get; set; } = DrawingTool.Brush;
 
         public MainForm()
         {
             InitializeComponent();
-            Color = Color.Black;
+            CurrentColor = System.Drawing.Color.Black; // Èçìåíåíî ñ Color íà CurrentColor
             PenWidth = 3;
             èíñòğóìåíòTextBox.Text = PenWidth.ToString();
             WireUpEventHandlers();
             UpdateColorSelection();
+            UpdateToolSelection();
 
             ñîõğàíèòüToolStripMenuItem.Enabled = false;
             ñîõğàíèòüÊàêToolStripMenuItem.Enabled = false;
@@ -49,6 +62,44 @@ namespace MDIPaint
 
             this.MdiChildActivate += MainForm_MdiChildActivate;
             èíñòğóìåíòTextBox.KeyDown += èíñòğóìåíòTextBox_KeyDown;
+
+            êèñòüToolStripButton.Click += (s, e) => {
+                CurrentTool = DrawingTool.Brush;
+                UpdateToolSelection();
+            };
+
+            ëèíèÿToolStripButton.Click += (s, e) =>
+            {
+                MainForm.CurrentTool = DrawingTool.Line;
+                UpdateToolSelection();
+            };
+
+            ıëëèïñToolStripButton.Click += (s, e) => {
+                CurrentTool = DrawingTool.Ellipse;
+                UpdateToolSelection();
+            };
+
+            ïğÿìîóãîëüíèêToolStripButton.Click += (s, e) => {
+                CurrentTool = DrawingTool.Rectangle;
+                UpdateToolSelection();
+            };
+
+            ëàñòèêToolStripButton.Click += (s, e) => {
+                CurrentTool = DrawingTool.Eraser;
+                UpdateToolSelection();
+            };
+
+        }
+
+        private void UpdateToolSelection()
+        {
+            êèñòüToolStripButton.Checked = (CurrentTool == DrawingTool.Brush);
+            ëèíèÿToolStripButton.Checked = (CurrentTool == DrawingTool.Line);
+            ıëëèïñToolStripButton.Checked = (CurrentTool == DrawingTool.Ellipse);
+            ïğÿìîóãîëüíèêToolStripButton.Checked = (CurrentTool == DrawingTool.Rectangle);
+            ëàñòèêToolStripButton.Checked = (CurrentTool == DrawingTool.Eraser);
+
+            èíñòğóìåíòTextBox.Text = MainForm.PenWidth.ToString();
         }
 
         private void MainForm_MdiChildActivate(object sender, EventArgs e)
@@ -113,19 +164,19 @@ namespace MDIPaint
         // Color selection methods
         private void êğàñíûéToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Color = Color.Red;
+            CurrentColor = Color.Red;
             UpdateColorSelection();
         }
 
         private void ñèíèéToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Color = Color.Blue;
+            CurrentColor = Color.Blue;
             UpdateColorSelection();
         }
 
         private void çåëåíûéToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Color = Color.Green;
+            CurrentColor = Color.Green;
             UpdateColorSelection();
         }
 
@@ -135,7 +186,7 @@ namespace MDIPaint
             {
                 if (cd.ShowDialog() == DialogResult.OK)
                 {
-                    Color = cd.Color;
+                    CurrentColor = cd.Color;
                     UpdateColorSelection();
                 }
             }
@@ -225,12 +276,12 @@ namespace MDIPaint
         private void UpdateColorSelection()
         {
             // Update visual indicators for selected color
-            êğàñíûéToolStripMenuItem.Checked = (Color == Color.Red);
-            ñèíèéToolStripMenuItem.Checked = (Color == Color.Blue);
-            çåëåíûéToolStripMenuItem.Checked = (Color == Color.Green);
-            äğóãîéToolStripMenuItem.Checked = !(Color == Color.Red ||
-                                              Color == Color.Blue ||
-                                              Color == Color.Green);
+            êğàñíûéToolStripMenuItem.Checked = (CurrentColor == Color.Red);
+            ñèíèéToolStripMenuItem.Checked = (CurrentColor == Color.Blue);
+            çåëåíûéToolStripMenuItem.Checked = (CurrentColor == Color.Green);
+            äğóãîéToolStripMenuItem.Checked = !(CurrentColor == Color.Red ||
+                                              CurrentColor == Color.Blue ||
+                                              CurrentColor == Color.Green);
         }
 
     }

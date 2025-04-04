@@ -2,9 +2,6 @@
 {
     partial class MainForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         private MenuStrip основноеМеню;
@@ -34,11 +31,14 @@
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripLabel кистьLabel;
         private ToolStripTextBox инструментTextBox;
+        private ToolStripButton кистьToolStripButton;
+        private ToolStripButton линияToolStripButton;
+        private ToolStripButton эллипсToolStripButton;
+        private ToolStripButton прямоугольникToolStripButton;
+        private ToolStripButton ластикToolStripButton;
+        private ToolStripButton заливкаToolStripButton;
+        private ToolStripSeparator toolStripSeparator1;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -48,12 +48,6 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             основноеМеню = new MenuStrip();
@@ -75,6 +69,13 @@
             справкаToolStripMenuItem = new ToolStripMenuItem();
             оПрограммеToolStripMenuItem = new ToolStripMenuItem();
             панельИнструментов = new ToolStrip();
+            кистьToolStripButton = new ToolStripButton();
+            линияToolStripButton = new ToolStripButton();
+            эллипсToolStripButton = new ToolStripButton();
+            прямоугольникToolStripButton = new ToolStripButton();
+            ластикToolStripButton = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            заливкаToolStripButton = new ToolStripButton();
             цветToolStripDropDownButton = new ToolStripDropDownButton();
             красныйToolStripMenuItem = new ToolStripMenuItem();
             синийToolStripMenuItem = new ToolStripMenuItem();
@@ -93,7 +94,8 @@
             основноеМеню.Location = new Point(0, 0);
             основноеМеню.MdiWindowListItem = окноToolStripMenuItem;
             основноеМеню.Name = "основноеМеню";
-            основноеМеню.Size = new Size(800, 24);
+            основноеМеню.Padding = new Padding(7, 2, 0, 2);
+            основноеМеню.Size = new Size(933, 24);
             основноеМеню.TabIndex = 0;
             основноеМеню.Text = "menuStrip1";
             // 
@@ -209,46 +211,106 @@
             // 
             оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
             оПрограммеToolStripMenuItem.ShortcutKeys = Keys.F1;
-            оПрограммеToolStripMenuItem.Size = new Size(180, 22);
+            оПрограммеToolStripMenuItem.Size = new Size(177, 22);
             оПрограммеToolStripMenuItem.Text = "&О программе...";
             // 
             // панельИнструментов
             // 
-            панельИнструментов.Items.AddRange(new ToolStripItem[] { цветToolStripDropDownButton, toolStripSeparator3, кистьLabel, инструментTextBox });
+            панельИнструментов.Items.AddRange(new ToolStripItem[] { кистьToolStripButton, линияToolStripButton, эллипсToolStripButton, прямоугольникToolStripButton, ластикToolStripButton, toolStripSeparator1, заливкаToolStripButton, цветToolStripDropDownButton, toolStripSeparator3, кистьLabel, инструментTextBox });
             панельИнструментов.Location = new Point(0, 24);
             панельИнструментов.Name = "панельИнструментов";
-            панельИнструментов.Size = new Size(800, 25);
+            панельИнструментов.Size = new Size(933, 25);
             панельИнструментов.TabIndex = 1;
             панельИнструментов.Text = "toolStrip1";
             // 
+            // кистьToolStripButton
+            // 
+            кистьToolStripButton.CheckOnClick = true;
+            кистьToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            кистьToolStripButton.Image = Properties.Resources.paint_brush;
+            кистьToolStripButton.ImageTransparentColor = Color.Magenta;
+            кистьToolStripButton.Name = "кистьToolStripButton";
+            кистьToolStripButton.Size = new Size(23, 22);
+            кистьToolStripButton.Text = "Кисть";
+            // 
+            // линияToolStripButton
+            // 
+            линияToolStripButton.CheckOnClick = true;
+            линияToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            линияToolStripButton.Image = Properties.Resources.line;
+            линияToolStripButton.ImageTransparentColor = Color.Magenta;
+            линияToolStripButton.Name = "линияToolStripButton";
+            линияToolStripButton.Size = new Size(23, 22);
+            линияToolStripButton.Text = "Линия";
+            // 
+            // эллипсToolStripButton
+            // 
+            эллипсToolStripButton.CheckOnClick = true;
+            эллипсToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            эллипсToolStripButton.Image = Properties.Resources.cir;
+            эллипсToolStripButton.ImageTransparentColor = Color.Magenta;
+            эллипсToolStripButton.Name = "эллипсToolStripButton";
+            эллипсToolStripButton.Size = new Size(23, 22);
+            эллипсToolStripButton.Text = "Эллипс";
+            // 
+            // прямоугольникToolStripButton
+            // 
+            прямоугольникToolStripButton.CheckOnClick = true;
+            прямоугольникToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            прямоугольникToolStripButton.Image = Properties.Resources.rec;
+            прямоугольникToolStripButton.ImageTransparentColor = Color.Magenta;
+            прямоугольникToolStripButton.Name = "прямоугольникToolStripButton";
+            прямоугольникToolStripButton.Size = new Size(23, 22);
+            прямоугольникToolStripButton.Text = "Прямоугольник";
+            // 
+            // ластикToolStripButton
+            // 
+            ластикToolStripButton.CheckOnClick = true;
+            ластикToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            ластикToolStripButton.Image = Properties.Resources.erase;
+            ластикToolStripButton.ImageTransparentColor = Color.Magenta;
+            ластикToolStripButton.Name = "ластикToolStripButton";
+            ластикToolStripButton.Size = new Size(23, 22);
+            ластикToolStripButton.Text = "Ластик";
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 25);
+            // 
+            // заливкаToolStripButton
+            // 
+            // Изменим кнопку на переключаемую
+            this.заливкаToolStripButton.CheckOnClick = true;
+            this.заливкаToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.заливкаToolStripButton.ImageTransparentColor = Color.Magenta;
+            this.заливкаToolStripButton.Name = "заливкаToolStripButton";
+            this.заливкаToolStripButton.Size = new Size(23, 22);
+            this.заливкаToolStripButton.Text = "Заливка фигур";
+            // 
             // цветToolStripDropDownButton
             // 
-            цветToolStripDropDownButton.BackgroundImageLayout = ImageLayout.Center;
             цветToolStripDropDownButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             цветToolStripDropDownButton.DropDownItems.AddRange(new ToolStripItem[] { красныйToolStripMenuItem, синийToolStripMenuItem, зеленыйToolStripMenuItem, другойToolStripMenuItem });
-            цветToolStripDropDownButton.Image = Properties.Resources.paint_brush;
             цветToolStripDropDownButton.ImageTransparentColor = Color.Magenta;
             цветToolStripDropDownButton.Name = "цветToolStripDropDownButton";
-            цветToolStripDropDownButton.Size = new Size(29, 22);
+            цветToolStripDropDownButton.Size = new Size(13, 22);
+            цветToolStripDropDownButton.Text = "Цвет";
             // 
             // красныйToolStripMenuItem
             // 
-            красныйToolStripMenuItem.ForeColor = SystemColors.ControlText;
-            красныйToolStripMenuItem.Image = Properties.Resources.red;
             красныйToolStripMenuItem.Name = "красныйToolStripMenuItem";
             красныйToolStripMenuItem.Size = new Size(180, 22);
             красныйToolStripMenuItem.Text = "Красный";
             // 
             // синийToolStripMenuItem
             // 
-            синийToolStripMenuItem.Image = Properties.Resources.blue;
             синийToolStripMenuItem.Name = "синийToolStripMenuItem";
             синийToolStripMenuItem.Size = new Size(180, 22);
             синийToolStripMenuItem.Text = "Синий";
             // 
             // зеленыйToolStripMenuItem
             // 
-            зеленыйToolStripMenuItem.Image = Properties.Resources.green;
             зеленыйToolStripMenuItem.Name = "зеленыйToolStripMenuItem";
             зеленыйToolStripMenuItem.Size = new Size(180, 22);
             зеленыйToolStripMenuItem.Text = "Зеленый";
@@ -273,19 +335,19 @@
             // инструментTextBox
             // 
             инструментTextBox.Name = "инструментTextBox";
-            инструментTextBox.Size = new Size(100, 25);
-            инструментTextBox.Text = "3"; // Значение по умолчанию
-            инструментTextBox.KeyDown += new KeyEventHandler(инструментTextBox_KeyDown);
+            инструментTextBox.Size = new Size(116, 25);
+            инструментTextBox.Text = "3";
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(933, 519);
             Controls.Add(панельИнструментов);
             Controls.Add(основноеМеню);
             IsMdiContainer = true;
             MainMenuStrip = основноеМеню;
+            Margin = new Padding(4, 3, 4, 3);
             Name = "MainForm";
             Text = "MDI Paint";
             основноеМеню.ResumeLayout(false);
@@ -294,8 +356,7 @@
             панельИнструментов.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
-        }
 
-        #endregion
+        }
     }
 }
