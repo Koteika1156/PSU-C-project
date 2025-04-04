@@ -211,7 +211,6 @@
             оПрограммеToolStripMenuItem.ShortcutKeys = Keys.F1;
             оПрограммеToolStripMenuItem.Size = new Size(180, 22);
             оПрограммеToolStripMenuItem.Text = "&О программе...";
-            оПрограммеToolStripMenuItem.Click += оПрограммеToolStripMenuItem_Click;
             // 
             // панельИнструментов
             // 
@@ -237,27 +236,27 @@
             красныйToolStripMenuItem.ForeColor = SystemColors.ControlText;
             красныйToolStripMenuItem.Image = Properties.Resources.red;
             красныйToolStripMenuItem.Name = "красныйToolStripMenuItem";
-            красныйToolStripMenuItem.Size = new Size(123, 22);
+            красныйToolStripMenuItem.Size = new Size(180, 22);
             красныйToolStripMenuItem.Text = "Красный";
             // 
             // синийToolStripMenuItem
             // 
             синийToolStripMenuItem.Image = Properties.Resources.blue;
             синийToolStripMenuItem.Name = "синийToolStripMenuItem";
-            синийToolStripMenuItem.Size = new Size(123, 22);
+            синийToolStripMenuItem.Size = new Size(180, 22);
             синийToolStripMenuItem.Text = "Синий";
             // 
             // зеленыйToolStripMenuItem
             // 
             зеленыйToolStripMenuItem.Image = Properties.Resources.green;
             зеленыйToolStripMenuItem.Name = "зеленыйToolStripMenuItem";
-            зеленыйToolStripMenuItem.Size = new Size(123, 22);
+            зеленыйToolStripMenuItem.Size = new Size(180, 22);
             зеленыйToolStripMenuItem.Text = "Зеленый";
             // 
             // другойToolStripMenuItem
             // 
             другойToolStripMenuItem.Name = "другойToolStripMenuItem";
-            другойToolStripMenuItem.Size = new Size(123, 22);
+            другойToolStripMenuItem.Size = new Size(180, 22);
             другойToolStripMenuItem.Text = "Другой...";
             // 
             // toolStripSeparator3
@@ -274,9 +273,9 @@
             // инструментTextBox
             // 
             инструментTextBox.Name = "инструментTextBox";
-            инструментTextBox.ReadOnly = true;
             инструментTextBox.Size = new Size(100, 25);
-            инструментTextBox.Click += инструментTextBox_Click;
+            инструментTextBox.Text = "3"; // Значение по умолчанию
+            инструментTextBox.KeyDown += new KeyEventHandler(инструментTextBox_KeyDown);
             // 
             // MainForm
             // 
