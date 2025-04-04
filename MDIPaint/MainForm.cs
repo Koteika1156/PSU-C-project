@@ -6,7 +6,6 @@ namespace MDIPaint
     {
         public static Color CurrentColor { get; set; }
         public static int PenWidth { get; set; }
-        public string CurrentFilePath { get; set; }
 
         public enum DrawingTool
         {
@@ -22,6 +21,8 @@ namespace MDIPaint
 
         public MainForm()
         {
+            this.FormClosing += MainForm_FormClosing;
+
             InitializeComponent();
             CurrentColor = System.Drawing.Color.Black;
             PenWidth = 3;
@@ -64,28 +65,40 @@ namespace MDIPaint
             brushToolStripButton.Click += (s, e) => {
                 CurrentTool = DrawingTool.Brush;
                 UpdateToolSelection();
+                UpdateActiveDocumentCursor();
             };
 
-            lineToolStripButton.Click += (s, e) =>
-            {
+            lineToolStripButton.Click += (s, e) => {
                 CurrentTool = DrawingTool.Line;
                 UpdateToolSelection();
+                UpdateActiveDocumentCursor();
             };
 
             ellipseToolStripButton.Click += (s, e) => {
                 CurrentTool = DrawingTool.Ellipse;
                 UpdateToolSelection();
+                UpdateActiveDocumentCursor();
             };
 
             rectangleToolStripButton.Click += (s, e) => {
                 CurrentTool = DrawingTool.Rectangle;
                 UpdateToolSelection();
+                UpdateActiveDocumentCursor();
             };
 
             eraserToolStripButton.Click += (s, e) => {
                 CurrentTool = DrawingTool.Eraser;
                 UpdateToolSelection();
+                UpdateActiveDocumentCursor();
             };
+        }
+
+        private void UpdateActiveDocumentCursor()
+        {
+            if (this.ActiveMdiChild is DocumentForm activeDoc)
+            {
+                activeDoc.UpdateCursor();
+            }
         }
 
         private void UpdateToolSelection()
@@ -126,13 +139,6 @@ namespace MDIPaint
         {
             var frmAbout = new AboutBox1();
             frmAbout.ShowDialog();
-        }
-
-        private void NewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var frm = new DocumentForm();
-            frm.MdiParent = this;
-            frm.Show();
         }
 
         private void DrawingToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
@@ -187,41 +193,6 @@ namespace MDIPaint
             }
         }
 
-        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (ActiveMdiChild is DocumentForm activeDoc)
-            {
-                if (string.IsNullOrEmpty(activeDoc.FilePath))
-                {
-                    SaveAsToolStripMenuItem_Click(sender, e);
-                }
-                else
-                {
-                    SaveDocument(activeDoc, activeDoc.FilePath);
-                }
-            }
-        }
-
-        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (ActiveMdiChild is DocumentForm activeDoc)
-            {
-                using (SaveFileDialog dlg = new SaveFileDialog())
-                {
-                    dlg.AddExtension = true;
-                    dlg.Filter = "Windows Bitmap (*.bmp)|*.bmp|JPEG Files (*.jpg)|*.jpg|PNG (*.png)|*.png";
-                    dlg.DefaultExt = "bmp";
-
-                    if (dlg.ShowDialog() == DialogResult.OK)
-                    {
-                        SaveDocument(activeDoc, dlg.FileName);
-                        activeDoc.Text = Path.GetFileName(dlg.FileName);
-                        activeDoc.FilePath = dlg.FileName;
-                    }
-                }
-            }
-        }
-
         private void SaveDocument(DocumentForm doc, string filePath)
         {
             try
@@ -252,6 +223,40 @@ namespace MDIPaint
                 "Mode: outline + fill" : "Mode: outline only";
         }
 
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (Form childForm in MdiChildren)
+            {
+                if (childForm is DocumentForm doc)
+                {
+                    doc.Activate();
+                    if (!doc.PromptToSave())
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void DocumentForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DocumentForm doc = (DocumentForm)sender;
+            if (!doc.PromptToSave())
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void NewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new DocumentForm();
+            frm.MdiParent = this;
+            frm.FormClosing += DocumentForm_FormClosing;
+            frm.Show();
+        }
+
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog dlg = new OpenFileDialog())
@@ -262,18 +267,51 @@ namespace MDIPaint
                 {
                     try
                     {
-                        var image = Image.FromFile(dlg.FileName);
                         var frm = new DocumentForm();
                         frm.MdiParent = this;
-                        frm.Bitmap = new Bitmap(image);
-                        frm.Text = Path.GetFileName(dlg.FileName);
+                        frm.FormClosing += DocumentForm_FormClosing;
+                        frm.Bitmap = new Bitmap(Image.FromFile(dlg.FileName));
                         frm.FilePath = dlg.FileName;
+                        frm.IsModified = false; // Новый документ не изменен
                         frm.Show();
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show($"Error opening: {ex.Message}", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild is DocumentForm activeDoc)
+            {
+                if (string.IsNullOrEmpty(activeDoc.FilePath))
+                {
+                    SaveAsToolStripMenuItem_Click(sender, e);
+                }
+                else
+                {
+                    activeDoc.SaveToFile(activeDoc.FilePath);
+                }
+            }
+        }
+
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild is DocumentForm activeDoc)
+            {
+                using (SaveFileDialog dlg = new SaveFileDialog())
+                {
+                    dlg.Filter = "Windows Bitmap (*.bmp)|*.bmp|JPEG Files (*.jpg)|*.jpg|PNG (*.png)|*.png";
+                    dlg.DefaultExt = "bmp";
+                    dlg.FileName = activeDoc.FilePath;
+
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        activeDoc.SaveToFile(dlg.FileName);
                     }
                 }
             }

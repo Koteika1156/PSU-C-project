@@ -1,16 +1,29 @@
-﻿using static MDIPaint.MainForm;
+﻿using System.Drawing.Imaging;
+using static MDIPaint.MainForm;
 
 namespace MDIPaint
 {
     public partial class DocumentForm : Form
     {
+        private Cursor[] _toolCursors;
         private Point _startPoint;
         private bool _isDrawing = false;
         private Bitmap _mainBitmap;
         private Bitmap _previewBitmap;
         private Point _lastPoint;
-        private Rectangle _currentShape;
         private Point _currentMousePos;
+        public string FilePath { get; set; }
+        private bool _isModified = false;
+
+        public bool IsModified
+        {
+            get => _isModified;
+            set
+            {
+                _isModified = value;
+                UpdateTitle();
+            }
+        }
 
         public Bitmap Bitmap
         {
@@ -19,24 +32,103 @@ namespace MDIPaint
             {
                 _mainBitmap?.Dispose();
                 _mainBitmap = value;
+                IsModified = true;
                 Invalidate();
             }
         }
 
-        public string FilePath { get; set; }
-        public bool IsSaved { get; set; }
+        private void UpdateTitle()
+        {
+            string title = string.IsNullOrEmpty(FilePath) ? "Untitled" : Path.GetFileName(FilePath);
+            if (_isModified) title += " *";
+            this.Text = title;
+        }
 
         public DocumentForm()
         {
             InitializeComponent();
             Bitmap = new Bitmap(600, 600);
             ClearCanvas();
-            this.MouseDown += DocumentForm_MouseDown;
+
+            _toolCursors = new Cursor[]
+            {
+                Cursors.Cross,
+                Cursors.Arrow,
+                Cursors.Hand,
+                Cursors.UpArrow,
+                Cursors.Default
+            };
+
+            this.MouseDown += DocumentForm_MouseClick;
             this.MouseMove += DocumentForm_MouseMove;
             this.MouseUp += DocumentForm_MouseUp;
             this.DoubleBuffered = true;
-        }
 
+            UpdateCursor();
+            UpdateTitle();
+        }
+        public void UpdateCursor()
+        {
+            this.Cursor = _toolCursors[(int)MainForm.CurrentTool];
+        }
+        public bool PromptToSave()
+        {
+            if (!_isModified) return true;
+
+            string fileName = string.IsNullOrEmpty(FilePath) ? "Untitled" : Path.GetFileName(FilePath);
+            var result = MessageBox.Show(
+                $"Do you want to save changes to {fileName}?",
+                "MDI Paint",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                if (string.IsNullOrEmpty(FilePath))
+                {
+                    using (var saveDialog = new SaveFileDialog())
+                    {
+                        saveDialog.Filter = "Windows Bitmap (*.bmp)|*.bmp|JPEG Files (*.jpg)|*.jpg|PNG (*.png)|*.png";
+                        saveDialog.DefaultExt = "bmp";
+                        saveDialog.FileName = fileName;
+
+                        if (saveDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            SaveToFile(saveDialog.FileName);
+                            return true;
+                        }
+                        return false;
+                    }
+                }
+                else
+                {
+                    SaveToFile(FilePath);
+                    return true;
+                }
+            }
+            return result != DialogResult.Cancel;
+        }
+        public void SaveToFile(string filePath)
+        {
+            try
+            {
+                ImageFormat format = Path.GetExtension(filePath).ToLower() switch
+                {
+                    ".jpg" or ".jpeg" => ImageFormat.Jpeg,
+                    ".png" => ImageFormat.Png,
+                    _ => ImageFormat.Bmp,
+                };
+
+                Bitmap.Save(filePath, format);
+                FilePath = filePath;
+                IsModified = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving file: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void ClearCanvas()
         {
             using (Graphics g = Graphics.FromImage(Bitmap))
@@ -60,8 +152,9 @@ namespace MDIPaint
             Invalidate();
         }
 
-        private void DocumentForm_MouseDown(object sender, MouseEventArgs e)
+        private void DocumentForm_MouseClick(object sender, MouseEventArgs e)
         {
+            UpdateCursor();
             if (e.Button == MouseButtons.Left)
             {
                 _startPoint = e.Location;
@@ -101,16 +194,6 @@ namespace MDIPaint
 
                 Invalidate();
             }
-        }
-
-        private Rectangle GetCurrentShape(Point start, Point end)
-        {
-            int x = Math.Min(start.X, end.X);
-            int y = Math.Min(start.Y, end.Y);
-            int width = Math.Abs(start.X - end.X);
-            int height = Math.Abs(start.Y - end.Y);
-
-            return new Rectangle(x, y, width, height);
         }
 
         private void DocumentForm_MouseUp(object sender, MouseEventArgs e)
